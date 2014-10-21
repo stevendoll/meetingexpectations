@@ -17,9 +17,11 @@ rails generate scaffold StatusType name:string display_order:float
 rails generate scaffold Status title:string description:text status_on:datetime status_type_id:uuid created_by:uuid project_id:uuid
 rails generate scaffold Comment employee_id:uuid creator_id:uuid description:text comment_type_id:uuid
 
-rails generate scaffold Meeting name:text description:text trashed:boolean template:boolean draft:boolean archived:boolean privacy:text starts_at:datetime ends_at:datetime all_day:boolean creator_id:uuid account_id:uuid location_id:uuid location_comments:uuid color:string
+rails generate scaffold Meeting name:text description:text trashed:boolean template:boolean draft:boolean archived:boolean privacy:text starts_at:datetime ends_at:datetime all_day:boolean creator_id:uuid account_id:uuid location_id:uuid location_comments:text color:string
 
 rails generate scaffold AgendaItem ends_at:datetime starts_at:datetime completed:boolean trashed:boolean description:text position:float presenter:string name:text meeting_id:uuid
+
+rails generate scaffold Device device_type:string device_token:string user_id:uuid
 
 rails generate scaffold Location name:string address_1:text address_2:text city:string state:string zip:string
 

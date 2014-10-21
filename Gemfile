@@ -16,6 +16,21 @@ gem 'devise_invitable'
 gem 'high_voltage'
 gem 'simple_token_authentication'
 gem 'gibbon' #mailchimp list
+
+gem "paperclip"
+gem 'aws-sdk'
+
+gem 'acts-as-taggable-on'
+gem 'will_paginate'
+
+gem 'pushmeup' #push notifications
+gem 'twilio-ruby' #sms
+
+# memory logging
+gem 'oink'
+
+
+
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'pundit'

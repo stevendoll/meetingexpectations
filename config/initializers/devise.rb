@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '6da3bc9df1c16efe187f4aaceac4ef2e2a12ad3b290cccd159ed07ddbfa9d2b959eeb75bc33dc302aa68c46a4278df63810bad6b2ee4ea349818125845064677'
+  config.secret_key = '6da3bc9df1c16efe187f4aaceac4ef2e2a12ad3b290cccd159ed07ddbfa9d2b959eeb75bc33dc302aa68c46a4278df63810bad6b2ee4ea349818125845064677'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -59,7 +59,7 @@ Devise.setup do |config|
   # given strategies, for example, `config.http_authenticatable = [:database]` will
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+  config.http_authenticatable = true
 
   # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
@@ -281,6 +281,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+    manager.failure_app = CustomAuthFailure
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

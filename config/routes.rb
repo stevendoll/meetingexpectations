@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      # resources :meetings do
+      #   resources :agenda_items
+      #   resources :tasks
+      #   resources :participants
+      # end
+      resources :registrations, :only => [:index, :create]
+      # patch 'profile' => 'registrations#update'
+    end
+  end
+
   get 'home/index'
 
   root to: 'visitors#index'
