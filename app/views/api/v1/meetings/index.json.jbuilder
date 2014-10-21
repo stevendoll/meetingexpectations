@@ -21,12 +21,15 @@ json.planned_meetings do
 
     json.participants do
       json.array!(meeting.participants) do |participant|
-        if current_user == meeting.creator
-          json.extract! participant, :id, :name, :full_name, :first_name, :last_name, :description, :email, :created_at, :updated_at
-        else
-          json.extract! participant, :id, :name, :full_name, :first_name, :last_name, :description, :email, :created_at, :updated_at
-        end
-        json.url participant_url(participant)
+        json.name participant.try(:user).try(:name) 
+        json.full_name participant.try(:user).try(:full_name) 
+        json.first_name participant.try(:user).try(:first_name) 
+        json.last_name participant.try(:user).try(:last_name) 
+        json.email participant.try(:user).try(:email) 
+        json.description participant.try(:user).try(:description) 
+        json.created_at participant.try(:user).try(:created_at) 
+        json.updated_at participant.try(:user).try(:updated_at) 
+        json.url participant_url(participant.try(:user))
 
       end
     end

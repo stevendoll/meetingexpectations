@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :invite, :destroy]
   after_action :verify_authorized
 
   def index
@@ -30,6 +30,11 @@ class UsersController < ApplicationController
     authorize user
     user.destroy
     redirect_to users_path, :notice => "User deleted."
+  end
+
+  def invite
+    @user.send_confirmation_instructions
+    redirect_to :back, :only_path => true, :notice => "Sent invitation to #{@user.email}."
   end
 
   private
