@@ -9,26 +9,91 @@ class API::V1::MeetingsController < ApplicationController
   respond_to :json
 
 
-  # GET /api/v1/posts
+  # GET meetingexpectations.herokuapp.com/api/v1/meetings
+  #
+  # {
+  #   planned_meetings: [
+  #     {
+  #       id: "13f6cd1e-1fa0-4ff2-8ccb-9f7c92454242",
+  #       name: "Lets get together",
+  #       description: "I wanna talk to everyone",
+  #       trashed: false,
+  #       template: false,
+  #       draft: false,
+  #       archived: false,
+  #       completed: false,
+  #       privacy: "",
+  #       starts_at: "2014-10-21T20:27:00.000Z",
+  #       ends_at: "2014-10-21T20:27:00.000Z",
+  #       all_day: false,
+  #       location_comments: "Don't forget to bring snacks",
+  #       color: "#fff",
+  #       created_at: "2014-10-21T20:27:56.584Z",
+  #       updated_at: "2014-10-21T20:27:56.584Z",
+  #       url: http://meetingexpectations.herokuapp.com/meetings/13f6cd1e-1fa0-4ff2-8ccb-9f7c92454242,
+  #
+  #       creator: {
+  #         name: "Steven",
+  #         full_name: "Steven Doll",
+  #         description: "",
+  #         avatar_url: /avatars/thumb/missing.png
+  #       },
+  #
+  #       location: {
+  #         name: "Rigil Conference Room",
+  #         address_1: "888 17th St NW",
+  #         address_2: "3rd Floor",
+  #         city: "Washington",
+  #         state: "DC",
+  #         zip: "20008"
+  #       },
+  #       participants: [
+  #         {
+  #           name: "Steven",
+  #           full_name: "Steven Doll",
+  #           first_name: "Steven",
+  #           last_name: "Doll",
+  #           email: "user@example.com",
+  #           description: "",
+  #           created_at: "2014-10-21T03:47:49.095Z",
+  #           updated_at: "2014-10-21T20:25:58.828Z",
+  #           url: http://meetingexpectations.herokuapp.com/participants/fc0210a7-8d91-43aa-bdd9-e6d5e040197a
+  #         }
+  #       ],
+  #         agenda_items: [
+  #         {
+  #           id: "53e68bd7-96e6-465a-a3dc-ebe969d92116",
+  #           ends_at: "2014-10-21T20:30:00.000Z",
+  #           starts_at: "2014-10-21T20:30:00.000Z",
+  #           completed: false,
+  #           trashed: false,
+  #           description: "",
+  #           position: null,
+  #           presenter: "Sean",
+  #           name: "Talk about Picio",
+  #           created_at: "2014-10-21T20:31:09.239Z",
+  #           updated_at: "2014-10-21T20:31:09.239Z",
+  #           url: http://meetingexpectations.herokuapp.com/agenda_items/53e68bd7-96e6-465a-a3dc-ebe969d92116
+  #           },
+  #           {
+  #             id: "2aa471a1-e1a2-43d3-adf1-74dc9f52ea89",
+  #             ends_at: "2014-10-21T20:31:00.000Z",
+  #             starts_at: "2014-10-21T20:31:00.000Z",
+  #             completed: false,
+  #             trashed: false,
+  #             description: "",
+  #             position: null,
+  #             presenter: "The team",
+  #             name: "Provide an update",
+  #             created_at: "2014-10-21T20:31:41.540Z",
+  #             updated_at: "2014-10-21T20:31:41.540Z",
+  #             url: http://meetingexpectations.herokuapp.com/agenda_items/2aa471a1-e1a2-43d3-adf1-74dc9f52ea89
+  #           }
+  #         ]
+  #       }
+  #     ]
+  #   }
   def index
-    #
-    # published_at is the date when a post first has a privacy setting of “friends” or “public” 
-    # Once set, published_at does not change even if the privacy is changed through private and public, for example
-    #
-    # in the api, displayed_at can be used to order the posts in a familiar manner:
-    #
-    # for “all_posts” which includes friends’ posts with privacy=friends and any post with privacy=public
-    #
-    #   displayed_at = published_at
-    #
-    # for “shared_with_me” 
-    #
-    #   displayed_at = the date the post was shared with me: post.shares(shared with me).created_at
-    #
-    # for “my_posts”
-    #
-    #   displayed_at = created_at
-    #
     if (
       @meetings = Meeting.all
       )
