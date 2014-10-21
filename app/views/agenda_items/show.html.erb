@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ends at:</strong>
+  <%= @agenda_item.ends_at %>
+</p>
+
+<p>
+  <strong>Starts at:</strong>
+  <%= @agenda_item.starts_at %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @agenda_item.completed %>
+</p>
+
+<p>
+  <strong>Trashed:</strong>
+  <%= @agenda_item.trashed %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @agenda_item.description %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @agenda_item.position %>
+</p>
+
+<p>
+  <strong>Presenter:</strong>
+  <%= @agenda_item.presenter %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @agenda_item.name %>
+</p>
+
+<p>
+  <strong>Meeting:</strong>
+  <%= @agenda_item.meeting_id %>
+</p>
+
+<%= link_to 'Edit', edit_agenda_item_path(@agenda_item) %> |
+<%= link_to 'Back', agenda_items_path %>

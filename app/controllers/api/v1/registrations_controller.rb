@@ -35,15 +35,15 @@ class API::V1::RegistrationsController < ApplicationController
     end
 
 
-    respond_to do |format|
-      if @user
-        format.json { render :json => @user.as_json(:only => [:authentication_token, :name, :email, :first_name, :last_name, :email, :phone, :description], :methods => [:full_name, :avatar_url]), status: :created }
-      else
-        warden.custom_failure!
-        format.json { render :json => { :result => 'login failed'}, status: :unauthorized}
-      end
+    if @user
+      render action: 'show', status: 200
+    else
+      warden.custom_failure!
+      format.json { render :json => { :result => 'login failed'}, status: :unauthorized}
     end
+
   end
+
 
 
   def create

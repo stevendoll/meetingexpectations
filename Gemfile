@@ -15,6 +15,8 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'high_voltage'
 gem 'simple_token_authentication'
+gem 'attribute_normalizer'
+
 gem 'gibbon' #mailchimp list
 
 gem "paperclip"

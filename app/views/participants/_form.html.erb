@@ -1,0 +1,14 @@
+<%= simple_form_for(@participant) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :meeting %>
+    <%= f.association :user %>
+    <%= f.input :attended %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

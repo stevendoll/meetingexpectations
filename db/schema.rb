@@ -11,11 +11,103 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014200159) do
+ActiveRecord::Schema.define(version: 20141021184914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "accounts", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "name"
+    t.uuid     "creator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "agenda_items", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.datetime "ends_at"
+    t.datetime "starts_at"
+    t.boolean  "completed"
+    t.boolean  "trashed"
+    t.text     "description"
+    t.float    "position"
+    t.string   "presenter"
+    t.text     "name"
+    t.uuid     "meeting_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "devices", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "device_type"
+    t.string   "device_token"
+    t.uuid     "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "name"
+    t.uuid     "account_id"
+    t.uuid     "creator_id"
+    t.uuid     "parent_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "name"
+    t.text     "address_1"
+    t.text     "address_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.uuid     "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meetings", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.text     "name"
+    t.text     "description"
+    t.boolean  "trashed"
+    t.boolean  "template"
+    t.boolean  "draft"
+    t.boolean  "archived"
+    t.boolean  "completed"
+    t.text     "privacy"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean  "all_day"
+    t.uuid     "creator_id"
+    t.uuid     "account_id"
+    t.uuid     "location_id"
+    t.text     "location_comments"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participants", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.uuid     "meeting_id"
+    t.uuid     "user_id"
+    t.boolean  "attended"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "planned_start"
+    t.datetime "planned_end"
+    t.boolean  "trashed"
+    t.float    "position"
+    t.uuid     "meeting_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "email",                  default: "", null: false

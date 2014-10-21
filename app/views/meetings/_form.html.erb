@@ -1,0 +1,26 @@
+<%= simple_form_for(@meeting) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :trashed %>
+    <%= f.input :template %>
+    <%= f.input :draft %>
+    <%= f.input :archived %>
+    <%= f.input :completed %>
+    <%= f.input :privacy %>
+    <%= f.input :starts_at %>
+    <%= f.input :ends_at %>
+    <%= f.input :all_day %>
+    <%= f.association :creator %>
+    <%= f.association :account %>
+    <%= f.association :location %>
+    <%= f.input :location_comments %>
+    <%= f.input :color %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

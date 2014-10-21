@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @meeting.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @meeting.description %>
+</p>
+
+<p>
+  <strong>Trashed:</strong>
+  <%= @meeting.trashed %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @meeting.template %>
+</p>
+
+<p>
+  <strong>Draft:</strong>
+  <%= @meeting.draft %>
+</p>
+
+<p>
+  <strong>Archived:</strong>
+  <%= @meeting.archived %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @meeting.completed %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @meeting.privacy %>
+</p>
+
+<p>
+  <strong>Starts at:</strong>
+  <%= @meeting.starts_at %>
+</p>
+
+<p>
+  <strong>Ends at:</strong>
+  <%= @meeting.ends_at %>
+</p>
+
+<p>
+  <strong>All day:</strong>
+  <%= @meeting.all_day %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @meeting.creator_id %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @meeting.account_id %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @meeting.location_id %>
+</p>
+
+<p>
+  <strong>Location comments:</strong>
+  <%= @meeting.location_comments %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @meeting.color %>
+</p>
+
+<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', meetings_path %>

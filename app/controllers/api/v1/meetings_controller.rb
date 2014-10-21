@@ -1,10 +1,10 @@
-class API::V1::PostsController < ApplicationController
+class API::V1::MeetingsController < ApplicationController
   
   # token authentication see https://github.com/gonzalo-bulnes/simple_token_authentication
   acts_as_token_authentication_handler_for User #, fallback_to_devise: false
   before_filter :authenticate_user_from_token!
 
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_meeting, only: [:show, :edit, :update]
 
   respond_to :json
 
@@ -30,9 +30,7 @@ class API::V1::PostsController < ApplicationController
     #   displayed_at = created_at
     #
     if (
-      @all_posts = Post.followed_by(current_user)
-      @shared_posts = current_user.friends_posts
-      @my_posts = current_user.posts
+      @meetings = Meeting.all
       )
 
       render action: 'index', status: 200
@@ -227,26 +225,26 @@ class API::V1::PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
+    def set_meeting
+      @meeting = Meeting.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :body, :privacy, :picture, :audio, :tag_list, tag_list: [], friend_ids: [], friends: [], picture_attributes: [:filename, :data, :content_type], audio_attributes: [:filename, :data, :content_type]) 
+    def meeting_params
+      params.require(:meeting).permit(:name, :description, :privacy, :picture, :audio, :tag_list, tag_list: [], friend_ids: [], friends: [], picture_attributes: [:filename, :data, :content_type], audio_attributes: [:filename, :data, :content_type]) 
     end
 
-    # without picture and audio
-    def post_params_without_attachments
-      params.require(:post).permit(:title, :body, :privacy, :tag_list, tag_list: [], friend_ids: [], friends: []) 
-    end
+    # # without picture and audio
+    # def post_params_without_attachments
+    #   params.require(:post).permit(:title, :body, :privacy, :tag_list, tag_list: [], friend_ids: [], friends: []) 
+    # end
 
-    def picture_params
-      params.require(:post).permit(:picture, picture_attributes: [:filename, :data, :content_type]) 
-    end
+    # def picture_params
+    #   params.require(:post).permit(:picture, picture_attributes: [:filename, :data, :content_type]) 
+    # end
 
-    def audio_params
-      params.require(:post).permit(:audio, audio_attributes: [:filename, :data, :content_type]) 
-    end
+    # def audio_params
+    #   params.require(:post).permit(:audio, audio_attributes: [:filename, :data, :content_type]) 
+    # end
 
 end
