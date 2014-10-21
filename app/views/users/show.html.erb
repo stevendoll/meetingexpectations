@@ -1,3 +1,21 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
+<div class="span8, offset2">
+<% content_for(:title) { "User Profile" } %>
+
+<p>
+  <%= image_tag @user.avatar.url(:web) %>
+</p>
+
+<h1><%= @user.name %></h1>
+
+
+<h2>Contact information</h2>
+<p><%= @user.first_name if @user.first_name %> <%= @user.last_name if @user.last_name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<p>Phone: <%= @user.phone if @user.phone %></p>
+<p>Email: <%= @user.email if @user.email %></p>
+
+
+<%= link_to 'Edit', edit_user_path(@user), :class => 'btn btn-mini' %>
+
+
+</div>
