@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :participant do
-    meeting_id ""
-    user_id ""
+    meeting
+    user
     attended false
     description "MyText"
   end

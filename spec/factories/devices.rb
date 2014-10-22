@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :device do
     device_type "MyString"
     device_token "MyString"
-    user_id ""
+    user
   end
 end

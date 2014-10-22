@@ -54,15 +54,12 @@ class API::V1::RegistrationsController < ApplicationController
     @user = User.new(user_params)
     @user.password_confirmation = @user.password
 
-    respond_to do |format|
-      if @user.save
-        format.json { render :json => @user.as_json(:only => [:authentication_token, :email]), status: :created }
-      else
-        warden.custom_failure!
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render action: 'show', status: 200
+    else
+      warden.custom_failure!
+      render json: @user.errors, status: :unprocessable_entity
     end
-
 
   end
 

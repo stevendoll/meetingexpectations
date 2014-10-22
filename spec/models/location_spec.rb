@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Location, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) { @location = Location.new(name: 'my location') }
+
+  subject { @location }
+
+  it { should respond_to(:name) }
+
+  it "#name returns a string" do
+    expect(@location.name).to match 'my location'
+  end
 end

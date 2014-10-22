@@ -8,6 +8,6 @@ FactoryGirl.define do
     city "MyString"
     state "MyString"
     zip "MyString"
-    account_id ""
+    account
   end
 end

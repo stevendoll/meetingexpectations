@@ -8,6 +8,6 @@ FactoryGirl.define do
     planned_end "2014-10-21 14:49:14"
     trashed false
     position 1.5
-    meeting_id ""
+    meeting
   end
 end

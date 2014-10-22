@@ -1,10 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :group do
+  factory :group, aliases: [:parent_group] do
     name "MyString"
-    account_id ""
-    creator_id ""
-    parent_group_id ""
+    account
+    creator
+    parent_group
   end
 end

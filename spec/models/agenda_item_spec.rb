@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe AgendaItem, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) { @agenda_item = AgendaItem.new(name: 'my agenda item') }
+
+  subject { @agenda_item }
+
+  it { should respond_to(:name) }
+
+  it "#name returns a string" do
+    expect(@agenda_item.name).to match 'my agenda item'
+  end
 end

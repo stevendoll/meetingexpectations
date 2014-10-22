@@ -8,4 +8,9 @@ RSpec.configure do |config|
   config.include Requests::JsonHelpers, type: :controller
   #config.include AuthHelpers, type: :controller
 
+  # basic auth
+  # https://gist.github.com/mattconnolly/4158961
+  config.include BasicAuthRequestHelpers, :type => :request
+  config.include BasicAuthHelpers, :type => :controller
+
 end

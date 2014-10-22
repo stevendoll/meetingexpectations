@@ -10,6 +10,6 @@ FactoryGirl.define do
     position 1.5
     presenter "MyString"
     name "MyText"
-    meeting_id ""
+    meeting
   end
 end

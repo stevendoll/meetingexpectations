@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :account do
     name "MyString"
-    creator_id ""
+    creator
   end
 end
