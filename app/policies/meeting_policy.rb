@@ -10,18 +10,18 @@ class MeetingPolicy
     def resolve
       if user.admin?
         scope.all
-        #scope.where(:enterprise => user.enterprise)
+        #scope.where(:account => user.account)
       else
-        scope.where(:enterprise => user.enterprise)
+        scope.where(:account => user.account)
       end
     end
   end
 
-  attr_reader :user, :node
+  attr_reader :user, :meeting
 
-  def initialize(user, node)
+  def initialize(user, meeting)
     @user = user
-    @node = node
+    @meeting = meeting
   end
 
   def index?
@@ -29,40 +29,25 @@ class MeetingPolicy
   end
 
   def new?
-    @user.admin? or @user.enterprise == @node.enterprise
+    @user.admin? or @user.account == @meeting.account
   end
 
-  def copy?
-    @user.admin? or @user.enterprise == @node.enterprise
-  end
+  # def copy?
+  #   @user.admin? or @user.account == @meeting.account
+  # end
+
   def show?
-    @user.admin? or @user.enterprise == @node.enterprise
-  end
-
-  def canvas?
-    @user.admin? or @user.enterprise == @node.enterprise
-  end
-
-  def mountain?
-    @user.admin? or @user.enterprise == @node.enterprise
-  end
-
-  def mountain_share?
-    @user.admin? or @user.enterprise == @node.enterprise
-  end
-
-  def activities?
-    @user.admin? or @user.enterprise == @node.enterprise
+    @user.admin? or @user.account == @meeting.account
   end
 
   def create?
-    @user.admin? or @user.enterprise == @node.enterprise
+    @user.admin? or @user.account == @meeting.account
   end
   def edit?
-    @user.admin? or @user.enterprise == @node.enterprise
+    @user.admin? or @user.account == @meeting.account
   end
   def update?
-    @user.admin? or @user.enterprise == @node.enterprise
+    @user.admin? or @user.account == @meeting.account
   end
 
   def destroy?
