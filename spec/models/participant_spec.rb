@@ -7,7 +7,7 @@ RSpec.describe Participant, :type => :model do
 
   it { should respond_to(:user_id) }
 
-  it "#user_id returns a string" do
+  it "ME-145 #user_id returns a string" do
     expect(@participant.user_id).to match 'test task'
   end
 end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :group, aliases: [:parent_group] do
-    name "MyString"
+    name "My group"
     account
     creator
     parent_group

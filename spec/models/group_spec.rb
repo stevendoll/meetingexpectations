@@ -7,7 +7,7 @@ RSpec.describe Group, :type => :model do
 
   it { should respond_to(:name) }
 
-  it "#name returns a string" do
+  it "ME-145 #name returns a string" do
     expect(@group.name).to match 'my group'
   end
 end

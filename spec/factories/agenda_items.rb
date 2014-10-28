@@ -9,7 +9,7 @@ FactoryGirl.define do
     description "MyText"
     position 1.5
     presenter "MyString"
-    name "MyText"
+    name "My agenda item"
     meeting
   end
 end

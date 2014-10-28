@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :device do
-    device_type "MyString"
-    device_token "MyString"
+    device_type "My device type"
+    device_token "My device token"
     user
   end
 end

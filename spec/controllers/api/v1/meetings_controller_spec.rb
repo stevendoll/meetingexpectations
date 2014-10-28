@@ -7,7 +7,7 @@ describe API::V1::MeetingsController do
 
   describe 'GET #index' do
 
-    it "shows success with valid authentication token and email" do
+    it "ME-147 ME-124 shows success with valid authentication token and email" do
       meeting = FactoryGirl.create(:meeting)
       user = FactoryGirl.create(:user)
 

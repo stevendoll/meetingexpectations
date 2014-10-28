@@ -7,11 +7,11 @@ RSpec.describe Account, :type => :model do
 
   it { should respond_to(:name) }
 
-  it "#name returns a string" do
+  it "ME-145 #name returns a string" do
     expect(@account.name).to match 'my account'
   end
 
-  it "is valid with a name, creator" do
+  it "ME-145 is valid with a name, creator" do
     user = FactoryGirl.create(:user)
 
     account = Account.new(
@@ -20,7 +20,7 @@ RSpec.describe Account, :type => :model do
     expect(account).to be_valid
   end
 
-  it "is invalid without a name" do
+  it "ME-145 is invalid without a name" do
     user = FactoryGirl.create(:user)
 
     account = Account.new(
@@ -29,7 +29,7 @@ RSpec.describe Account, :type => :model do
     expect(account).not_to be_valid
   end
 
-  it "is invalid without a creator" do
+  it "ME-145 is invalid without a creator" do
     account = Account.new(
       name: 'my account')
     expect(account).not_to be_valid

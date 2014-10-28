@@ -7,7 +7,7 @@ RSpec.describe Task, :type => :model do
 
   it { should respond_to(:name) }
 
-  it "#name returns a string" do
+  it "ME-145 #name returns a string" do
     expect(@task.name).to match 'test task'
   end
 end

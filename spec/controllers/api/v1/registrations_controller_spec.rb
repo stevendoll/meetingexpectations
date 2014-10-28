@@ -7,7 +7,7 @@ describe API::V1::RegistrationsController do
   
   describe 'GET #index' do
 
-    it "shows the user with authentication token with valid email and password" do
+    it "ME-146 ME-147 shows the user with authentication token with valid email and password" do
       user = FactoryGirl.create(:user, email: 'test@example.com')
 
       http_login      
@@ -18,7 +18,7 @@ describe API::V1::RegistrationsController do
       expect(response.body).to have_content user.authentication_token
     end
 
-    it "renders the :show template" do
+    it "ME-146 ME-147 renders the :show template" do
       user = FactoryGirl.create(:user, email: 'test@example.com')
 
       http_login      
