@@ -1,117 +1,423 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @meeting.name %>
-</p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2><%= @meeting.name %></h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li class="active">
+        <strong>Status Meetings</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-sm-8">
+    <div class="title-action">
+      <a href="" class="btn btn-primary">Start Meeting</a>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @meeting.description %>
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="wrapper wrapper-content">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Participants</h5> <span class="label label-primary">IN+</span>
+              <div class="ibox-tools">
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <li><a href="#">Config option 1</a>
+                  </li>
+                  <li><a href="#">Config option 2</a>
+                  </li>
+                </ul>
+                <a class="close-link">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
 
-<h2>Participants</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Attended</th>
+                    <th>Description</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Email</th>
-      <th>Attended</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                <tbody>
+                  <% @meeting.participants.each do |participant| %>
+                  <tr>
+                    <td><%= participant.user.full_name %></td>
+                    <td><%= participant.user.email %></td>
+                    <td><%= participant.attended %></td>
+                    <td><%= participant.description %></td>
+                    <td><%= link_to 'Show', participant %></td>
+                    <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
+                    <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
 
-  <tbody>
-    <% @meeting.participants.each do |participant| %>
-      <tr>
-        <td><%= participant.user.full_name %></td>
-        <td><%= participant.user.email %></td>
-        <td><%= participant.attended %></td>
-        <td><%= participant.description %></td>
-        <td><%= link_to 'Show', participant %></td>
-        <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
-        <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              <br>
 
-<br>
+              <%= link_to 'New Participant', new_participant_path %>
 
-<%= link_to 'New Participant', new_participant_path %>
+            </div>
+          </div>
 
 
-<p>
-  <strong>Trashed:</strong>
-  <%= @meeting.trashed %>
-</p>
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Agenda Items</h5> <span class="label label-primary">IN+</span>
+              <div class="ibox-tools">
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <li><a href="#">Config option 1</a>
+                  </li>
+                  <li><a href="#">Config option 2</a>
+                  </li>
+                </ul>
+                <a class="close-link">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
 
-<p>
-  <strong>Template:</strong>
-  <%= @meeting.template %>
-</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Ends at</th>
+                    <th>Starts at</th>
+                    <th>Presenter</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
 
-<p>
-  <strong>Draft:</strong>
-  <%= @meeting.draft %>
-</p>
+                <tbody>
+                  <% @meeting.agenda_items.each do |agenda_item| %>
+                  <tr>
+                    <td><%= agenda_item.name %></td>
+                    <td><%= agenda_item.description %></td>
+                    <td><%= agenda_item.ends_at %></td>
+                    <td><%= agenda_item.starts_at %></td>
+                    <td><%= agenda_item.presenter %></td>
+                    <td><%= link_to 'Show', agenda_item %></td>
+                    <td><%= link_to 'Edit', edit_agenda_item_path(agenda_item) %></td>
+                    <td><%= link_to 'Destroy', agenda_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
 
-<p>
-  <strong>Archived:</strong>
-  <%= @meeting.archived %>
-</p>
+              <br>
 
-<p>
-  <strong>Completed:</strong>
-  <%= @meeting.completed %>
-</p>
+              <%= link_to 'New Agenda item', new_agenda_item_path %>              
 
-<p>
-  <strong>Privacy:</strong>
-  <%= @meeting.privacy %>
-</p>
 
-<p>
-  <strong>Starts at:</strong>
-  <%= @meeting.starts_at %>
-</p>
 
-<p>
-  <strong>Ends at:</strong>
-  <%= @meeting.ends_at %>
-</p>
+            </div>
+          </div>
 
-<p>
-  <strong>All day:</strong>
-  <%= @meeting.all_day %>
-</p>
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Action Items</h5> <span class="label label-primary">IN+</span>
+              <div class="ibox-tools">
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <li><a href="#">Config option 1</a>
+                  </li>
+                  <li><a href="#">Config option 2</a>
+                  </li>
+                </ul>
+                <a class="close-link">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
 
-<p>
-  <strong>Creator:</strong>
-  <%= @meeting.creator_id %>
-</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Planned start</th>
+                    <th>Planned end</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
 
-<p>
-  <strong>Account:</strong>
-  <%= @meeting.account_id %>
-</p>
+                <tbody>
+                  <% @meeting.tasks.each do |task| %>
+                  <tr>
+                    <td><%= task.name %></td>
+                    <td><%= task.description %></td>
+                    <td><%= task.planned_start %></td>
+                    <td><%= task.planned_end %></td>
+                    <td><%= link_to 'Show', task %></td>
+                    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
 
-<p>
-  <strong>Location:</strong>
-  <%= @meeting.location_id %>
-</p>
+              <br>
 
-<p>
-  <strong>Location comments:</strong>
-  <%= @meeting.location_comments %>
-</p>
+              <%= link_to 'New Task', new_task_path %>
 
-<p>
-  <strong>Color:</strong>
-  <%= @meeting.color %>
-</p>
+            </div>
+          </div>
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+
+
+
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>More Information</h5> <span class="label label-primary">IN+</span>
+              <div class="ibox-tools">
+                <a class="collapse-link">
+                  <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <li><a href="#">Config option 1</a>
+                  </li>
+                  <li><a href="#">Config option 2</a>
+                  </li>
+                </ul>
+                <a class="close-link">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+            <div class="ibox-content">
+
+              <p>
+                <strong>Description:</strong>
+                <%= @meeting.description %>
+              </p>
+
+
+
+
+              <p>
+                <strong>Trashed:</strong>
+                <%= @meeting.trashed %>
+              </p>
+
+              <p>
+                <strong>Template:</strong>
+                <%= @meeting.template %>
+              </p>
+
+              <p>
+                <strong>Draft:</strong>
+                <%= @meeting.draft %>
+              </p>
+
+              <p>
+                <strong>Archived:</strong>
+                <%= @meeting.archived %>
+              </p>
+
+              <p>
+                <strong>Completed:</strong>
+                <%= @meeting.completed %>
+              </p>
+
+              <p>
+                <strong>Privacy:</strong>
+                <%= @meeting.privacy %>
+              </p>
+
+              <p>
+                <strong>Starts at:</strong>
+                <%= @meeting.starts_at %>
+              </p>
+
+              <p>
+                <strong>Ends at:</strong>
+                <%= @meeting.ends_at %>
+              </p>
+
+              <p>
+                <strong>All day:</strong>
+                <%= @meeting.all_day %>
+              </p>
+
+              <p>
+                <strong>Creator:</strong>
+                <%= @meeting.creator.full_name %>
+              </p>
+
+              <p>
+                <strong>Account:</strong>
+                <%= @meeting.account.name %>
+              </p>
+
+              <p>
+                <strong>Location:</strong>
+                <%= @meeting.location.name %><br />
+                <%= @meeting.location.address_1 %><br />
+                <%= @meeting.location.address_2 %><br />
+                <%= @meeting.location.city %> <%= @meeting.location.state %> <%= @meeting.location.zip %>
+              </p>
+
+              <p>
+                <strong>Location comments:</strong>
+                <%= @meeting.location_comments %>
+              </p>
+
+              <p>
+                <strong>Color:</strong>
+                <%= @meeting.color %>
+              </p>
+
+              <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+              <%= link_to 'Back', meetings_path %>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Discussions</h5>
+              <div class="ibox-tools">
+                <span class="label label-warning-light">10 Messages</span>
+              </div>
+            </div>
+            <div class="ibox-content">
+
+              <div>
+                <div class="feed-activity-list">
+
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/profile.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">5m ago</small>
+                      <strong>Monica Smith</strong> posted a new blog. <br>
+                      <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+
+                    </div>
+                  </div>
+
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/a2.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">2h ago</small>
+                      <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                      <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                    </div>
+                  </div>
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/a3.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">2h ago</small>
+                      <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                      <small class="text-muted">2 days ago at 8:30am</small>
+                    </div>
+                  </div>
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/a4.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right text-navy">5h ago</small>
+                      <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                      <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                      <div class="actions">
+                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                        <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/a5.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">2h ago</small>
+                      <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                      <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                      <div class="well">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                      </div>
+                      <div class="pull-right">
+                        <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/profile.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">23h ago</small>
+                      <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                      <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                    </div>
+                  </div>
+                  <div class="feed-element">
+                    <a href="profile.html" class="pull-left">
+                      <img alt="image" class="img-circle" src="img/a7.jpg">
+                    </a>
+                    <div class="media-body ">
+                      <small class="pull-right">46h ago</small>
+                      <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                      <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
