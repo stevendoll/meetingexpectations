@@ -32,8 +32,6 @@ gem 'twilio-ruby' #sms
 gem 'oink'
 
 
-
-gem 'newrelic_rpm'
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'
