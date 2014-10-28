@@ -3,6 +3,8 @@ class ActsAsTaggableOnMigration < ActiveRecord::Migration
   def self.up
     create_table :tags, id: :uuid do |t|
       t.string :name
+      t.string :icon  # support for tag icon from font-awesome
+      t.string :color # support for tag color
     end
 
     create_table :taggings, id: :uuid do |t|

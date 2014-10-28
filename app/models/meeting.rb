@@ -1,4 +1,5 @@
 class Meeting < ActiveRecord::Base
+  acts_as_taggable
   normalize_attributes :account_id, :creator_id, :location_id
 
   belongs_to :account

@@ -227,7 +227,13 @@
                 <strong>Description:</strong>
                 <%= @meeting.description %>
               </p>
-
+              <p>
+                <strong>Tags:</strong>
+                <% @meeting.tags.any? %>
+                <% @meeting.tags.each do |tag| %>
+                  <a href="#" class="btn btn-primary btn-mini"><%= tag.name.gsub(/\s/, "&nbsp;").html_safe %></a>
+                <% end %>
+              </p>
 
 
 

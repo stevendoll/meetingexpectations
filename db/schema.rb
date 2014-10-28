@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20141028201511) do
 
   create_table "tags", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string  "name"
+    t.string  "icon"
+    t.string  "color"
     t.integer "taggings_count", default: 0
   end
 

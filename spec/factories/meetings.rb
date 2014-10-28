@@ -50,5 +50,10 @@ FactoryGirl.define do
         create_list(:task, 5, meeting: meeting)
       end
     end
+    factory :meeting_with_tags do
+      # add tags
+      tag_list "tag1, tag2"
+
+    end
   end
 end

@@ -8,7 +8,7 @@ feature 'About page' do
   #   Given I am a visitor
   #   When I visit the 'about' page
   #   Then I see "About the Website"
-  scenario 'Visit the about page' do
+  scenario 'ME-122 Visit the about page' do
     visit 'pages/about'
     expect(page).to have_content 'About the Website'
   end

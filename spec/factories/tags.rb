@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :tag do
-    name "MyString"
-icon "MyString"
-color "MyString"
+    name "MyTag"
+    icon "fa-icon"
+    color "#ccc"
   end
 
 end

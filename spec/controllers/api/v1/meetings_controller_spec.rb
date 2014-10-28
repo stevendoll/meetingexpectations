@@ -19,7 +19,7 @@ describe API::V1::MeetingsController do
       expect(response.body).to have_content meeting.name
     end
 
-    it "renders the :index template" do
+    it "ME-124 renders the :index template" do
       meeting = FactoryGirl.create(:meeting_with_participants)
       user = FactoryGirl.create(:user)
 
@@ -38,22 +38,22 @@ describe API::V1::MeetingsController do
   end
   describe 'POST #create' do
 
-    it "creates a meeting with a valid name and user"
-    it "renders the :show template"
-    it "not create meeting information with invalid user" 
-    it "adds participants"
-    it "adds agenda items"
-    it "adds tasks"
+    it "ME-124 creates a meeting with a valid name and user"
+    it "ME-124 renders the :show template"
+    it "ME-124 not create meeting information with invalid user" 
+    it "ME-124 adds participants"
+    it "ME-124 adds agenda items"
+    it "ME-124 adds tasks"
 
   end
 
   describe 'PATCH #update' do
 
-    it "updates meeting information with valid user"
-    it "not update meeting information with invalid user" 
-    it "updates participants"
-    it "updates agenda items"
-    it "updates tasks"
+    it "ME-124 updates meeting information with valid user"
+    it "ME-124 not update meeting information with invalid user" 
+    it "ME-124 updates participants"
+    it "ME-124 updates agenda items"
+    it "ME-124 updates tasks"
 
   end
 
