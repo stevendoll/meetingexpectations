@@ -72,7 +72,7 @@ feature 'Meeting show page', :devise do
     me = FactoryGirl.create(:user)
     meeting = FactoryGirl.create(:meeting)
     login_as(me, :scope => :user)
-    Capybara.current_session.driver.header 'Referer', root_path
+    #Capybara.current_session.driver.header 'Referer', root_path
     visit meeting_path(meeting)
     expect(page).to have_content 'Access denied.'
   end
@@ -91,9 +91,11 @@ feature 'Meeting show page', :devise do
 
 
   scenario "ME-153 regular user can see meeting if participant" do
-    my_meeting = FactoryGirl.create(:meeting)
+    my_meeting = FactoryGirl.create(:meeting_with_nested_objects)
     not_my_meeting = FactoryGirl.create(:meeting)
-    me = my_meeting.participants.first
+    me = FactoryGirl.create(:user, :admin)
+    #my_meeting.participants << me
+    me = my_meeting.participants.first.user
     login_as(me, :scope => :user)
     Capybara.current_session.driver.header 'Referer', root_path
     visit meeting_path(my_meeting)

@@ -3,34 +3,40 @@ class MeetingsController < ApplicationController
   respond_to :html
 
   def index
-    @meetings = Meeting.all
+    @meetings = policy_scope(Meeting)
     respond_with(@meetings)
   end
 
   def show
+    authorize @meeting
     respond_with(@meeting)
   end
 
   def new
     @meeting = Meeting.new
+    authorize @meeting
     respond_with(@meeting)
   end
 
   def edit
+    authorize @meeting
   end
 
   def create
     @meeting = Meeting.new(meeting_params)
+    authorize @meeting
     flash[:notice] = 'Meeting was successfully created.' if @meeting.save
     respond_with(@meeting)
   end
 
   def update
+    authorize @meeting
     flash[:notice] = 'Meeting was successfully updated.' if @meeting.update(meeting_params)
     respond_with(@meeting)
   end
 
   def destroy
+    authorize @meeting
     @meeting.destroy
     respond_with(@meeting)
   end

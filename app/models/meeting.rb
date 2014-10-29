@@ -7,6 +7,7 @@ class Meeting < ActiveRecord::Base
   belongs_to :creator, :class_name  => 'User'
 
   has_many :participants
+  has_many :users, through: :participants
   has_many :tasks
   has_many :agenda_items
 

@@ -37,17 +37,17 @@ class MeetingPolicy
   # end
 
   def show?
-    @user.admin? or @user.account == @meeting.account
+    @user.admin? or @user == @meeting.creator or @meeting.users.include?(@user)
   end
 
   def create?
-    @user.admin? or @user.account == @meeting.account
+    #@user.admin? or @user.account == @meeting.account
   end
   def edit?
-    @user.admin? or @user.account == @meeting.account
+    @user.admin? or @user == @meeting.creator
   end
   def update?
-    @user.admin? or @user.account == @meeting.account
+    @user.admin? or @user == @meeting.creator
   end
 
   def destroy?
