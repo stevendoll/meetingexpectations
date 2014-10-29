@@ -69,9 +69,9 @@ class API::V1::RegistrationsController < ApplicationController
   #
   # PATCH /api/v1/profile
   #
-  # www.picioapp.com/api/v1/profile
-  # {"user":{"email": "steven@rigil.com", "name": "StevenD", "first_name": "Steven", "last_name": "Doll", "phone": "", "gender": "Male", "accepts_friend_requests": true, "age": "21-25", "description": "I'm a curious guy.", "avatar":{"data":"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=", "filename":"dot.gif", "content_type":"image/gif"}}}
-
+  # patch with avatar
+  # {"user":{"email": "steven@rigil.com", "name": "StevenD", "first_name": "Steven", "last_name": "Doll", "phone": "", "description": "I'm a curious guy.", "avatar":{"data":"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=", "filename":"dot.gif", "content_type":"image/gif"}}}
+  #
   # patch with device
   # {"user": {"email": "steven@rigil.com", "name": "StevenD", "first_name": "Steven", "last_name": "Doll", "phone": "", "gender": "Male", "accepts_friend_requests": true, "age": "21-25", "description": "I'm a curious guy.", "devices_attributes":[{"device_type":"aass","device_token":"1234"}]}}
 
@@ -80,56 +80,46 @@ class API::V1::RegistrationsController < ApplicationController
   #
 
   # {
-  # email: "steven@rigil.com"
-  # name: "StevenD"
-  # first_name: "Steven"
-  # last_name: "Doll"
-  # phone: ""
-  # gender: "Male"
-  # accepts_friend_requests: true
-  # age: "21-25"
-  # description: "I'm a curious guy."
-  # full_name: "Steven Doll"
-  # avatar_url: http://s3.amazonaws.com/PictureAppBackup/users/avatars/e0b/22d/2d-/thumb/dot.gif?1404334255
-  # -devices: [
-  # -{
-  # device_type: "aass"
-  # device_token: "1234"
-  # }
-  # ]
+  #   email: "steven@rigil.com",
+  #   name: "StevenD",
+  #   first_name: "Steven",
+  #   last_name: "Doll",
+  #   phone: "",
+  #   description: "I'm a curious guy.",
+  #   full_name: "Steven Doll",
+  #   avatar_url: http://s3-us-west-2.amazonaws.com/meetingexpectations-dev/users/avatars/573/6a5/38-/thumb/dot.gif?1414552318,
+  #   devices: [ ]
   # }
 
-  # def update
+  def update
 
-  #   # current_user from token authentication
-  #   @user = current_user
+    # current_user from token authentication
+    @user = current_user
 
-  #   # if avatar is included, convert it and add to params
-  #   if params[:user] && params[:user][:avatar]
-  #     data = StringIO.new(Base64.decode64(params[:user][:avatar][:data]))
-  #     data.class.class_eval { attr_accessor :original_filename, :content_type }
-  #     data.original_filename = params[:user][:avatar][:filename]
-  #     data.content_type = params[:user][:avatar][:content_type]
-  #     params[:user][:avatar] = data
+    # if avatar is included, convert it and add to params
+    if params[:user] && params[:user][:avatar]
 
-  #     @user.update_attributes(avatar_params)
-  #     @user.touch
-  #   end
+      # recodes base64 image data
+      process_avatar(params[:user][:avatar])
 
-  #   # Rails.logger.debug "user update: #{current_user.name}"
+      @user.update_attributes(avatar_params)
+      @user.touch
+    end
 
-  #   respond_to do |format|
-  #     if @user.update(user_params)
-  #       format.json { render :json => @user.as_json(:only => [:name, :email, :first_name, :last_name, :email, :phone, :description], :include => {:devices => 
-  #                                {:only => [:device_type, :device_token]}}, :methods => [:full_name, :avatar_url]), status: 200 }
-  #     else
-  #       warden.custom_failure!
-  #       format.json { render json: @user.errors, status: :unprocessable_entity }
-  #     end
-  #   end
+    # Rails.logger.debug "user update: #{current_user.name}"
+
+    respond_to do |format|
+      if @user.update(user_params)
+        format.json { render :json => @user.as_json(:only => [:name, :email, :first_name, :last_name, :email, :phone, :description], :include => {:devices => 
+                                 {:only => [:device_type, :device_token]}}, :methods => [:full_name, :avatar_url]), status: 200 }
+      else
+        warden.custom_failure!
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
 
 
-  # end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -142,6 +132,15 @@ class API::V1::RegistrationsController < ApplicationController
     def avatar_params
       params.require(:user).permit(:avatar, avatar_attributes: [:filename, :data, :content_type]) 
     end
+
+    def process_avatar(avatar)
+      data = StringIO.new(Base64.decode64(avatar[:data]))
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = avatar[:filename]
+      data.content_type = avatar[:content_type]
+      params[:user][:avatar] = data
+    end
+
 
 
 end

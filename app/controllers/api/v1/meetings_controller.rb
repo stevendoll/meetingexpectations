@@ -138,12 +138,12 @@ class API::V1::MeetingsController < ApplicationController
 
 
     if params[:post] && params[:post][:picture]
-      #:process_picture(params[:post])
-      data = StringIO.new(Base64.decode64(params[:post][:picture][:data]))
-      data.class.class_eval { attr_accessor :original_filename, :content_type }
-      data.original_filename = params[:post][:picture][:filename]
-      data.content_type = params[:post][:picture][:content_type]
-      params[:post][:picture] = data
+      process_picture(params[:post])
+      # data = StringIO.new(Base64.decode64(params[:post][:picture][:data]))
+      # data.class.class_eval { attr_accessor :original_filename, :content_type }
+      # data.original_filename = params[:post][:picture][:filename]
+      # data.content_type = params[:post][:picture][:content_type]
+      # params[:post][:picture] = data
 
     end
     
@@ -311,5 +311,14 @@ class API::V1::MeetingsController < ApplicationController
     # def audio_params
     #   params.require(:post).permit(:audio, audio_attributes: [:filename, :data, :content_type]) 
     # end
+
+    def process_picture(post)
+      data = StringIO.new(Base64.decode64(post[:picture][:data]))
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = post[:picture][:filename]
+      data.content_type = post[:picture][:content_type]
+      params[:post][:picture] = data
+    end
+
 
 end

@@ -39,12 +39,12 @@ describe API::V1::RegistrationsController do
 
   describe 'PATCH #profile' do
 
-    it "updates user information with valid email and token"
-    it "updates avatar if included"
-    it "renders the :show template"
-    it "ignores avatar if not included"
-    it "not update user information with invalid token"
-    it "not update user information with invalid email" 
+    it "ME-154 updates user information with valid email and token"
+    it "ME-154 updates avatar if included"
+    it "ME-154 renders the :show template"
+    it "ME-154 ignores avatar if not included"
+    it "ME-154 not update user information with invalid token"
+    it "ME-154 not update user information with invalid email" 
 
   end
 
