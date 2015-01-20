@@ -1,6 +1,6 @@
 json.planned_meetings do
   json.array!(@meetings) do |meeting|
-    json.extract! meeting, :id, :name, :description, :trashed, :template, :draft, :archived, :completed, :privacy, :starts_at, :ends_at, :all_day, :location_comments, :color, :created_at, :updated_at
+    json.extract! meeting, :id, :name, :description, :tag_list, :trashed, :template, :draft, :archived, :completed, :privacy, :starts_at, :ends_at, :all_day, :location_comments, :color, :created_at, :updated_at
     json.url meeting_url(meeting)
 
     json.creator do 
@@ -8,6 +8,12 @@ json.planned_meetings do
       json.full_name meeting.try(:creator).try(:full_name) 
       json.description meeting.try(:creator).try(:description) 
       json.avatar_url meeting.try(:creator).try(:avatar_url) 
+    end
+
+    json.tags do
+      json.array!(meeting.tags) do |tag|
+        json.extract! tag, :name
+      end
     end
 
     json.location do 

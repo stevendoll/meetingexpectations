@@ -1,4 +1,4 @@
-json.(@post, :id, :title, :creator_id, :tag_list, :body, :privacy, :picture_url, :picture_original_url, :picture_thumb_url, :audio_url, :number_of_likes, :number_of_plays, :created_at, :updated_at, :published_at)
+json.(@post, :id, :title, :tag_list, :body, :privacy, :picture_url, :picture_original_url, :picture_thumb_url, :audio_url, :number_of_likes, :number_of_plays, :created_at, :updated_at, :published_at)
 
 json.creator @post.creator, :id, :name, :full_name, :description, :avatar_url, :audio_url
 

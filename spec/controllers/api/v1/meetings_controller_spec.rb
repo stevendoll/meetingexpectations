@@ -35,6 +35,20 @@ describe API::V1::MeetingsController do
       #expect(json['participants'].count).to eq(5)
     end
 
+    # as an api user
+    # given i am authorized to see the meeting
+    # then i can see tags on a meeting
+    it "ME-148 shows meeting tags" do
+      meeting = FactoryGirl.create(:meeting_with_tags)
+      user = meeting.creator #creator can see the meeting
+      auth_with_user(user)
+      get :index
+      expect(response).to be_success   # test for the 200 status-code
+      expect(response.body).to have_content meeting.name
+      expect(response.body).to have_content 'tag1'
+      expect(response.body).to have_content 'tag2'
+    end
+
   end
   describe 'POST #create' do
 
